@@ -14,7 +14,8 @@ import java.security.cert.CertificateFactory
 class GeneratorTest {
     private val algorithms = mapOf(
         ("RSA" to 2048) to listOf(RSA_MD2, RSA_MD5, RSA_SHA1, RSA_SHA224, RSA_SHA256, RSA_SHA384, RSA_SHA512),
-        ("DSA" to 1024) to listOf(DSA_SHA1, DSA_SHA224, DSA_SHA256)
+        ("DSA" to 1024) to listOf(DSA_SHA1, DSA_SHA224, DSA_SHA256),
+        ("EC" to 256) to listOf(ECDSA_SHA1, ECDSA_SHA224, ECDSA_SHA256, ECDSA_SHA384, ECDSA_SHA512)
     )
 
     @Test

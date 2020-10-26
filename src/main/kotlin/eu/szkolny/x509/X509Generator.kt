@@ -36,7 +36,12 @@ class X509Generator(
         RSA_SHA512("1.2.840.113549.1.1.13", "SHA512withRSA"),
         DSA_SHA1("1.2.840.10040.4.3", "SHA1withDSA"),
         DSA_SHA224("2.16.840.1.101.3.4.3.1", "SHA224withDSA"),
-        DSA_SHA256("2.16.840.1.101.3.4.3.2", "SHA256withDSA")
+        DSA_SHA256("2.16.840.1.101.3.4.3.2", "SHA256withDSA"),
+        ECDSA_SHA1("1.2.840.10045.4.1", "SHA1withECDSA"),
+        ECDSA_SHA224("1.2.840.10045.4.3.1", "SHA224withECDSA"),
+        ECDSA_SHA256("1.2.840.10045.4.3.2", "SHA256withECDSA"),
+        ECDSA_SHA384("1.2.840.10045.4.3.3", "SHA384withECDSA"),
+        ECDSA_SHA512("1.2.840.10045.4.3.4", "SHA512withECDSA")
     }
 
     private fun buildName(name: Map<String, String>): ASN1Structure {
