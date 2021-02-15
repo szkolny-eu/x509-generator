@@ -33,11 +33,7 @@ config {
     }
 
     licensing {
-        licenses {
-            license {
-                id = 'MIT'
-            }
-        }
+        enabled = false
     }
 
     bintray {
