@@ -6,14 +6,12 @@ package eu.szkolny.x509
 
 import java.security.KeyPair
 import java.security.Signature
-import java.time.LocalDateTime
-import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.security.MessageDigest.getInstance as createSign
 
 class X509Generator(
     val signatureAlgorithm: Algorithm
 ) {
-    private val UTC = ZoneId.of("UTC")
     private val rdnTable = mapOf(
         "CN" to "2.5.4.3",
         "OU" to "2.5.4.11",
@@ -63,8 +61,8 @@ class X509Generator(
     fun generate(
         subject: Map<String, String>,
         issuer: Map<String, String> = subject,
-        notBefore: LocalDateTime = LocalDateTime.now(UTC),
-        notAfter: LocalDateTime = notBefore.plusYears(20),
+        notBefore: ZonedDateTime = ZonedDateTime.now(),
+        notAfter: ZonedDateTime = notBefore.plusYears(20),
         serialNumber: Long = System.currentTimeMillis(),
         keyPair: KeyPair
     ): ByteArray {

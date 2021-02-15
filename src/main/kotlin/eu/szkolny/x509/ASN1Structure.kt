@@ -5,9 +5,12 @@
 package eu.szkolny.x509
 
 import java.math.BigInteger
-import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class ASN1Structure {
+    private val UTC = ZoneId.of("UTC")
+
     private val data = mutableListOf<Byte>()
 
     private fun appendTag(tag: Int, target: MutableList<Byte> = data) {
@@ -83,15 +86,16 @@ class ASN1Structure {
         return appendTLV(0x05, emptyList())
     }
 
-    fun appendUTCTime(time: LocalDateTime): ASN1Structure {
-        val year = if (time.year >= 2000) time.year - 2000 else time.year - 1900
+    fun appendUTCTime(time: ZonedDateTime): ASN1Structure {
+        val utcTime = time.withZoneSameInstant(UTC)
+        val year = if (utcTime.year >= 2000) utcTime.year - 2000 else utcTime.year - 1900
         val list = listOf(
             year,
-            time.monthValue,
-            time.dayOfMonth,
-            time.hour,
-            time.minute,
-            time.second
+            utcTime.monthValue,
+            utcTime.dayOfMonth,
+            utcTime.hour,
+            utcTime.minute,
+            utcTime.second
         )
         val bytes = list
             .joinToString("") { it.toString().padStart(2, '0') }
