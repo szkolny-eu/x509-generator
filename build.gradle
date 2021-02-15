@@ -41,7 +41,7 @@ config {
     }
 
     bintray {
-        enabled     = true
+        enabled     = config.release
         credentials {
             username    = System.getenv('BINTRAY_USER')
             password    = System.getenv('BINTRAY_KEY')
