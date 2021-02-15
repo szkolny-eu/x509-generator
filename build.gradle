@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+    id 'org.kordamp.gradle.kotlin-project' version '0.43.0'
+    id 'org.kordamp.gradle.bintray' version '0.43.0'
 }
 
 group 'eu.szkolny'
@@ -13,4 +15,40 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+config {
+    release = (rootProject.findProperty('release') ?: false).toBoolean()
+
+    info {
+        name        = rootProject.name
+        description = 'A hacky solution to the difficulties of generating an X.509 certificate on JVM/Android.'
+        vendor      = 'Szkolny.eu'
+
+        links {
+            website         = 'https://github.com/szkolny-eu/x509-generator'
+            issueTracker    = 'https://github.com/szkolny-eu/x509-generator/issues'
+            scm             = 'https://github.com/szkolny-eu/x509-generator.git'
+        }
+    }
+
+    licensing {
+        licenses {
+            license {
+                id = 'MIT'
+            }
+        }
+    }
+
+    bintray {
+        enabled     = true
+        credentials {
+            username    = System.getenv('BINTRAY_USER')
+            password    = System.getenv('BINTRAY_KEY')
+        }
+        userOrg     = 'szkolny-eu'
+        repo        = 'szkolny-eu'
+        name        = rootProject.name
+        githubRepo  = 'szkolny-eu/x509-generator'
+    }
 }
